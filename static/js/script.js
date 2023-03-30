@@ -56,7 +56,6 @@ function getFromLocation(regionCode) {
 }
 
 function handleToLocation() {
-  print("hi")
   let locationEl = "";
   const toInput = document.getElementById("to").value;
   if (toInput.length > 1) {
@@ -105,9 +104,7 @@ function handleFindFlight() {
   departureDate = document.getElementById("date").value;
   let flightEl = "";
 
-  fetch(
-    `/api/v1/flight/search_offers/?originCode=${originCode}&destinationCode=${destinationCode}&departureDate=${departureDate}`
-  )
+  fetch(`/api/v1/flight/find_offers/?originCode=${originCode}&destinationCode=${destinationCode}&departureDate=${departureDate}`)
     .then((response) => response.json())
     .then((data) => {
       flights = data.data;
