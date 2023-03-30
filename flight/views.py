@@ -6,22 +6,25 @@ import json
 from amadeus import Client, ResponseError, Location
 from django.http import JsonResponse
 amadeus = Client(
-    client_id='zO6J8g20wwqn94IxxGMf7ST5ujqPqwGK',
-    client_secret='V0PB1OsA5evZA1oq'
+    client_id='GSGkZkcWo4V0xWdbw9ZA2KlbHA94PqfL',
+    client_secret='6k4W8AU73P0XOA78'
 )
 
 def select_destination(req, param):
     if req.method == "GET":
         try:
-            print(param)
-            response = amadeus.reference_data.locations.get(
-              keyword=param, subType=Location.ANY) 
+            print("param:",param)
+            response = amadeus.reference_data.locations.get(keyword=param, subType=Location.ANY) 
+            
+            print('response: ' , response.data)
             context = {
                 "data": response.data
             }
             return JsonResponse(context)
         except ResponseError as error:
+            print("ayo")
             print(error)
+
     else:
         return JsonResponse({"error": "Invalid request method"})
 
@@ -43,11 +46,13 @@ destinationLocationcode = destination_code,
             print(error)
     else:
         return JsonResponse({"error": "Invalid request method"})
-             
+
+@csrf_exempt         
 def price_search(req):
     if req.method == "POST":
         try:
-            flight = req.POST.get('flight')
+            data = json.loads(req.body)
+            flight = data.get("flight")
             response = amadeus.shopping.flight_offers.pricing.post(flight)
             print(response.data)
             return JsonResponse
@@ -56,10 +61,12 @@ def price_search(req):
     else:
           return JsonResponse({"error": "Invalid request method"})
 
+@csrf_exempt
 def book_a_flight(req):
     if req.method == "POST":
         try:
-            flight = req.POST.get('flight')
+            data = json.loads(req.body)
+            flight = data.get("flight")
             passenger = req.POST.get('passenger')
             booking = amadeus.booking.flight_orders.post(flight, passenger)
             return JsonResponse(booking)

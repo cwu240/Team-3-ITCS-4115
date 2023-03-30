@@ -3,3 +3,4 @@ __pycache__/
 
 #ignore all venv
 venv/
+evn/
