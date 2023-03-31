@@ -100,11 +100,15 @@ function getToLocation(regionCode) {
   toLocationData.style.display = "none";
 }
 
+
+
 function handleFindFlight() {
   departureDate = document.getElementById("date").value;
   let flightEl = "";
 
-  fetch(`/api/v1/flight/find_offers/?originCode=${originCode}&destinationCode=${destinationCode}&departureDate=${departureDate}`)
+  fetch(
+    `http://localhost:8000/api/v1/flight/search_offers/?originCode=${originCode}&destinationCode=${destinationCode}&departureDate=${departureDate}`
+  )
     .then((response) => response.json())
     .then((data) => {
       flights = data.data;
@@ -153,6 +157,7 @@ function handleFindFlight() {
       }
     });
 }
+
 
 function BookFlight(flight) {
   const first = document.getElementById("first").value;
