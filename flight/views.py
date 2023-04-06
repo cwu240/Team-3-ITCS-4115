@@ -53,7 +53,7 @@ def price_search(req):
             flight = data.get("flight")
             response = amadeus.shopping.flight_offers.pricing.post(flight)
             print(response.data)
-            return JsonResponse
+            return JsonResponse(response.data)
         except ResponseError as error:
             print(error)
     else:
@@ -64,9 +64,13 @@ def book_a_flight(req):
     if req.method == "POST":
         try:
             data = json.loads(req.body)
+            print(data)
             flight = data.get("flight")
-            passenger = req.POST.get('passenger')
+            print("flight" , flight)
+            passenger = data.get('traveler')
+            print("type of passenger:" , type(passenger))
             booking = amadeus.booking.flight_orders.post(flight, passenger)
+            print('flight:  ' , flight)
             return JsonResponse(booking)
         except ResponseError as error:
             print(error)

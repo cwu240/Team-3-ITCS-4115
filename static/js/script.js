@@ -101,6 +101,22 @@ function getToLocation(regionCode) {
 }
 
 
+function esc_attr(string) {
+  if (!string) {
+    return "";
+  }
+  return ("" + string).replace(/[&<>"'\/\\]/g, function(s) {
+    return {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': '&quot;',
+      "'": '&#39;',
+      "/": '&#47;',
+      "\\": '&#92;'
+    }[s];
+  });
+}
 
 function handleFindFlight() {
   departureDate = document.getElementById("date").value;
@@ -115,7 +131,10 @@ function handleFindFlight() {
 
       if (flights) {
         flights.map((flight) => {
-         console.log(flight)
+         //var stringifiedObj = esc_attr(JSON.stringify(flight))
+         //console.log(stringifiedObj)
+         //console.log(flight)
+         var button =  "<button class='btn btn-primary' onclick='BookFlight( " + esc_attr(JSON.stringify(flight)) + " )' >Book Flight</button>"
           flightEl +=
             '\
          <div class="card mb-3 mt-3" >\
@@ -147,7 +166,7 @@ function handleFindFlight() {
            <input type="text" id="last" placeholder="Your Last Name" class="form-control"/>\
          </div>\
          <div class="card-footer">\
-           <button class="btn btn-primary" onclick="BookFlight(flight)">Book Flight</button>\
+           '+  button +'\
          </div>\
        </div>'
         });
@@ -160,10 +179,11 @@ function handleFindFlight() {
 
 
 function BookFlight(flight) {
+  console.log(flight)
   const first = document.getElementById("first").value;
   const last = document.getElementById("last").value;
 
-  fetch("/api/v1/flight/price_offers", {
+  fetch("/api/v1/flight/price_search/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -176,7 +196,7 @@ function BookFlight(flight) {
     .then((dataObject) => {
       console.log("Success:", dataObject);
 
-      fetch("/api/v1/flight/book_flight/", {
+      fetch("/api/v1/flight/book_a_flight/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
