@@ -10,6 +10,8 @@ amadeus = Client(
     client_secret='6k4W8AU73P0XOA78'
 )
 
+
+
 def select_destination(req, param):
     if req.method == "GET":
         try:
@@ -68,9 +70,46 @@ def book_a_flight(req):
             flight = data.get("flight")
             print("flight" , flight)
             passenger = data.get('traveler')
-            print("type of passenger:" , type(passenger))
-            booking = amadeus.booking.flight_orders.post(flight, passenger)
-            print('flight:  ' , flight)
+            print(passenger)
+            traveler = {
+                'id': '1',
+                'dateOfBirth': '1982-01-16',
+                'name': {
+                    'firstName': str(passenger['first']),
+                    'lastName': str(passenger['last'])
+                },
+                'gender': 'MALE',
+                'contact': {
+                    'emailAddress': 'jorge.gonzales833@telefonica.es',
+                    'phones': [{
+                        'deviceType': 'MOBILE',
+                        'countryCallingCode': '34',
+                        'number': '480080076'
+                    }]
+                },
+                'documents': [{
+                    'documentType': 'PASSPORT',
+                    'birthPlace': 'Madrid',
+                    'issuanceLocation': 'Madrid',
+                    'issuanceDate': '2015-04-14',
+                    'number': '00000000',
+                    'expiryDate': '2025-04-14',
+                    'issuanceCountry': 'ES',
+                    'validityCountry': 'ES',
+                    'nationality': 'ES',
+                    'holder': True
+                }]
+            }
+
+
+            try:
+                #TODO --- instead of below line, just store ticket for flight in database
+                booking = amadeus.booking.flight_orders.post(flight, traveler).data
+                print(booking)
+            except Exception as error:
+                print("erorr when booking")
+                print(error)
+
             return JsonResponse(booking)
         except ResponseError as error:
             print(error)
