@@ -71,6 +71,7 @@ def book_a_flight(req):
             print("flight" , flight)
             passenger = data.get('traveler')
             print(passenger)
+            
             traveler = {
                 'id': '1',
                 'dateOfBirth': '1982-01-16',

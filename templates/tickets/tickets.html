@@ -1,0 +1,13 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <p>here your tickets will be dipslayed</p>
+{% else %}
+  <p>must log in to view tickets</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}
