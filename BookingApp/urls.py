@@ -24,5 +24,6 @@ urlpatterns = [
     path('api/v1/flight/', include('flight.urls')),
     path('booking/', include('frontend.urls')),
     path('tickets/', include('tickets.urls')),
+    path('contact_us/', include('contact_us.urls')),
     path('', TemplateView.as_view(template_name='home.html'), name='home'), 
 ]

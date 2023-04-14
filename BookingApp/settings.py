@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'accounts', 
     'flight',
-    'frontend'
+    'frontend',
+    'tickets',
+    'contact_us'
 ]
 
 MIDDLEWARE = [

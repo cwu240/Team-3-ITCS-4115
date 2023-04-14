@@ -1,0 +1,13 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <p>here is the contact page, you can submit a message to the admin team</p>
+{% else %}
+  <p>must log in to contact us</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}
