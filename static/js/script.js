@@ -8,6 +8,7 @@ let flights = [];
 const fromLocationData = document.getElementById("fromLocationData");
 const toLocationData = document.getElementById("toLocationData");
 const flightData = document.getElementById("flightData");
+const listOfFlightOffers = document.getElementById("listOfFlightOffers")
 
 function handleFromLocation() {
   let locationEl = "";
@@ -122,6 +123,9 @@ function handleFindFlight() {
   departureDate = document.getElementById("date").value;
   let flightEl = "";
 
+  let listoffers = "<h3>List of Flight Offers:</h3>";
+  
+
   fetch(
     `http://localhost:8000/api/v1/flight/search_offers/?originCode=${originCode}&destinationCode=${destinationCode}&departureDate=${departureDate}`
   )
@@ -171,14 +175,20 @@ function handleFindFlight() {
        </div>'
         });
         flightData.innerHTML = flightEl;
+        listOfFlightOffers.innerHTML = listoffers
       } else {
         alert("No flight Data found");
       }
     });
+
+    console.log(listoffers)
 }
 
 
 function BookFlight(flight) {
+
+
+
   console.log(flight)
   const first = document.getElementById("first").value;
   const last = document.getElementById("last").value;

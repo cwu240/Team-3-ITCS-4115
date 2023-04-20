@@ -2,10 +2,85 @@
 {% extends 'base.html' %}
 
 {% block title %}Home{% endblock %}
+{% block style %}
+<style>
+
+</style>
+
+{% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
-  <p>here is the contact page, you can submit a message to the admin team</p>
+
+{% if messages %}
+<div class="messages">
+{% for message in messages %}
+  <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+    {{ message }}
+  </div>
+{% endfor %}
+</div>
+{% endif %}
+
+
+
+
+<div id="contact" class="container">
+	<div class="container">										
+		<div class="section-title text-center">
+			<h1>Get in Touch</h1>
+			<p>Send us a message below with any questions or concerns</p>
+		</div>					
+		<div class="row">
+			<div class="col-lg-7">	
+				<div class="contact">
+					<form class="form" name="enq" method="post" action="submit" onsubmit="return validation();">
+            {% csrf_token %}
+						<div class="row">
+							<div class="form-group col-md-6">
+								<input type="text" name="name" class="form-control" placeholder="Name" required="required">
+							</div>
+							<div class="form-group col-md-6">
+								<input type="email" name="email" class="form-control" placeholder="Email" required="required">
+							</div>
+							<div class="form-group col-md-12">
+								<input type="text" name="subject" class="form-control" placeholder="Subject" required="required">
+							</div>
+							<div class="form-group col-md-12">
+								<textarea rows="6" name="message" class="form-control" placeholder="Your Message" required="required"></textarea>
+							</div>
+							<div class="col-md-12 text-center">
+								<button type="submit" value="Send message" name="submit" id="submitButton" class="btn btn-outline-primary" title="Submit Your Message!">Send Message</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div><!--- END COL --> 
+			<div class="col-lg-5">
+				<div class="single_address">
+					<i class="fa fa-map-marker"></i>
+					<h4>Our Address</h4>
+					<p>3481 Melrose Place, Beverly Hills</p>
+				</div>
+				<div class="single_address">
+					<i class="fa fa-envelope"></i>
+					<h4>Send your message</h4>
+					<p>Info@example.com</p>
+				</div>
+				<div class="single_address">
+					<i class="fa fa-phone"></i>
+					<h4>Call us on</h4>
+					<p>(+1) 517 397 7100</p>
+				</div>
+				<div class="single_address">
+					<i class="fa fa-clock-o"></i>
+					<h4>Work Time</h4>
+					<p>Mon - Fri: 08.00 - 16.00. <br>Sat: 10.00 - 14.00</p>
+				</div>					
+			</div><!--- END COL --> 
+		</div><!--- END ROW -->
+	</div><!--- END CONTAINER -->	
+</div>
 {% else %}
   <p>must log in to contact us</p>
   <a href="{% url 'login' %}">Log In</a>
