@@ -11,7 +11,6 @@ amadeus = Client(
 )
 
 
-
 def select_destination(req, param):
     if req.method == "GET":
         try:

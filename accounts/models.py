@@ -9,6 +9,15 @@ from .managers import CustomUserManager
 
 class CustomUser(AbstractUser):
     username = None
+
+    
+    first_name = models.CharField(max_length=2000,null=True,blank=True)
+    last_name = models.CharField(max_length=2000,null=True,blank=True)
+    gender = models.CharField(max_length=2000,null=True,blank=True)
+    phone_number = models.CharField(max_length=2000,null=True,blank=True)
+
+
+
     email = models.EmailField(_("email address"), unique=True)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
