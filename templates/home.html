@@ -3,12 +3,51 @@
 
 {% block title %}Home{% endblock %}
 
+{% block style %}
+
+<style>
+
+
+body {
+  background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+</style>
+
+{% endblock %}
+
 {% block content %}
-{% if user.is_authenticated %}
-  Hi {{ user.email }}!
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
-{% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
-{% endif %}
+
+
+<body class = "text-center">
+  <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto"></header>
+
+    <main role="main" class="inner cover">
+      <h1 class="cover-heading">Welcome to the flight booking app</h1>
+      <p class="lead">You can search for flights, book them and view your tickets right here</p>
+      {% if user.is_authenticated %}
+        <p class = "lead">Hey {{ user.email }}! Check out our flights </p>
+      {% else %}
+        <p>You are not logged in</p>
+        <a href="{% url 'login' %}" class="btn btn-default btn-outline-primary">Log In</a>
+      {% endif %}
+
+      
+      <p class="lead">
+        <a href="/booking/" class="btn btn-lg btn-primary">Start Searching</a>
+      </p>
+    </main>
+
+    <footer class="mastfoot mt-auto">
+      <div class="inner">
+        <p></p>
+      </div>
+    </footer>
+  </div>
+</body>
+
 {% endblock %}
