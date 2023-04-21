@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 import json
+from .models import Tickets
+from django.contrib import messages
 
 # Create your views here.
 from amadeus import Client, ResponseError, Location
@@ -52,8 +54,8 @@ def price_search(req):
         try:
             data = json.loads(req.body)
             flight = data.get("flight")
+            print("flight \n ", flight)
             response = amadeus.shopping.flight_offers.pricing.post(flight)
-            print(response.data)
             return JsonResponse(response.data)
         except ResponseError as error:
             print(error)
@@ -63,6 +65,7 @@ def price_search(req):
 @csrf_exempt
 def book_a_flight(req):
     if req.method == "POST":
+        current_user = req.user
         try:
             data = json.loads(req.body)
             print(data)
@@ -73,18 +76,18 @@ def book_a_flight(req):
             
             traveler = {
                 'id': '1',
-                'dateOfBirth': '1982-01-16',
+                'dateOfBirth': str(current_user.dob),
                 'name': {
-                    'firstName': str(passenger['first']),
-                    'lastName': str(passenger['last'])
+                    'firstName': current_user.first_name,
+                    'lastName': current_user.last_name
                 },
                 'gender': 'MALE',
                 'contact': {
-                    'emailAddress': 'jorge.gonzales833@telefonica.es',
+                    'emailAddress': current_user.email,
                     'phones': [{
                         'deviceType': 'MOBILE',
-                        'countryCallingCode': '34',
-                        'number': '480080076'
+                        'countryCallingCode': '1',
+                        'number': current_user.phone_number
                     }]
                 },
                 'documents': [{
@@ -105,7 +108,9 @@ def book_a_flight(req):
             try:
                 #TODO --- instead of below line, just store ticket for flight in database
                 booking = amadeus.booking.flight_orders.post(flight, traveler).data
-                print(booking)
+                ticket_obj = Tickets.objects.create(customer_id = current_user, json_ticket_data = booking)
+                ticket_obj.save()
+                messages.success(req, 'your flight has been booked')
             except Exception as error:
                 print("erorr when booking")
                 print(error)

@@ -5,7 +5,22 @@
 
 {% block title %}Booking{% endblock %}
 
+
+
 {% block content %}
+
+{% if messages %}
+<div class="messages">
+{% for message in messages %}
+  <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+    {{ message }}
+  </div>
+{% endfor %}
+</div>
+{% endif %}
+
+
+
     <div class="container">
       <div class="row">
         <form>

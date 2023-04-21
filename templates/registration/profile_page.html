@@ -111,8 +111,6 @@ form label {
           <div class="form-group">
             <label class="col-sm-2 control-label">gender</label>
 
-            <p>{{user.gender}}</p>
-
             {% if user.gender != "male" and user.gender != "female" %}
 
             <div class="col-sm-10">
@@ -175,6 +173,14 @@ form label {
               <input type="email" class="form-control" name = "email" value =  '{{ user.email }}'  >
             </div>
           </div>
+
+          <div class="form-group">
+            <label for="birthdate">Birthdate</label>
+            <div class="col-sm-10">
+                <input type="date" id="birthdate" name="birthdate" value='{{ user.dob|slugify }}'>
+            </div>
+          </div>
+          
         </div>
       </div>
           <div class="form-group">

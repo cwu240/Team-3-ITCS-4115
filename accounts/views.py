@@ -10,7 +10,6 @@ from .forms import CustomUserCreationForm
 from django.contrib import messages
 
 def profile_page(request):
-    print(request.user.gender)
     return render(request, "registration/profile_page.html", {})
 
 def submit(request):
@@ -22,6 +21,8 @@ def submit(request):
         last_name = profile_data.get("last_name")
         phone_number = profile_data.get("phone_number")
         email = profile_data.get("email")
+        dob = profile_data.get("birthdate")
+        print(dob)
 
         print(gender, first_name, last_name, phone_number, email)
 
@@ -30,6 +31,7 @@ def submit(request):
         current_user.last_name = last_name
         current_user.phone_number = phone_number
         current_user.email = email
+        current_user.dob = dob
 
         current_user.save()
         
