@@ -1,4 +1,5 @@
 <!-- templates/registration/login.html -->
+
 {% extends 'base.html' %}
 
 {% block title %}Login{% endblock %}
@@ -10,4 +11,6 @@
   {{ form.as_p }}
   <button type="submit">Log In</button>
 </form>
+<br>
+<p>Don't have an account? <a href="{% url 'signup' %}" class="btn btn-primary">Sign up</a></p>
 {% endblock %}
