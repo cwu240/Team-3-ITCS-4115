@@ -106,7 +106,6 @@ def book_a_flight(req):
 
 
             try:
-                #TODO --- instead of below line, just store ticket for flight in database
                 booking = amadeus.booking.flight_orders.post(flight, traveler).data
                 ticket_obj = Tickets.objects.create(customer_id = current_user, json_ticket_data = booking)
                 ticket_obj.save()

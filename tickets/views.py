@@ -48,9 +48,6 @@ def view_tickets(request):
          #print("\n")
          return render(request, "tickets/tickets.html", {'tickets':ticket_list ,'short_list':tickets_list_short})
 
-         
-
-
 
    return render(request, "tickets/tickets.html")
 

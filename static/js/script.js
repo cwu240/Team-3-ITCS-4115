@@ -10,6 +10,7 @@ const toLocationData = document.getElementById("toLocationData");
 const flightData = document.getElementById("flightData");
 const listOfFlightOffers = document.getElementById("listOfFlightOffers")
 
+
 function handleFromLocation() {
   let locationEl = "";
   const fromInput = document.getElementById("from").value;
@@ -52,7 +53,8 @@ function handleFromLocation() {
 
 function getFromLocation(regionCode) {
   originCode = regionCode;
-  console.log(originCode);
+  var fromInput = document.getElementById("from");
+  fromInput.value = originCode;
   fromLocationData.style.display = "none";
 }
 
@@ -98,6 +100,8 @@ function handleToLocation() {
 
 function getToLocation(regionCode) {
   destinationCode = regionCode;
+  var toInput = document.getElementById("to");
+  toInput.value = destinationCode;
   toLocationData.style.display = "none";
 }
 
