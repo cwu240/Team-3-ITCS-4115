@@ -23,7 +23,7 @@ function handleFromLocation() {
       fromLocationData.style.display = "block";
       fromLocationArray.map((location) => {
         locationEl +=
-          '<div class="card mb-3 mt-3" onclick="getFromLocation(\'' +
+          '<div class="locations card mb-3 mt-3" onclick="getFromLocation(\'' +
           location.iataCode +
           '\')">\
           <div class="card-header"><b>Name:</b>  ' +
@@ -70,7 +70,7 @@ function handleToLocation() {
       toLocationData.style.display = "block";
       toLocationArray.map((location) => {
         locationEl +=
-          '<div class="card mb-3 mt-3" onclick="getToLocation(\'' +
+          '<div class="locations card mb-3 mt-3" onclick="getToLocation(\'' +
           location.iataCode +
           '\')">\
             <div class="card-header"><b>Name:</b>  ' +
