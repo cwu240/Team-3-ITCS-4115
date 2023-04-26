@@ -22,7 +22,7 @@ def view_tickets(request):
          ticket_list.append(ast.literal_eval(str(ticket_list1[i].json_ticket_data)))
 
       tickets_list_short = []
-      for i in range(0, len(ticket_list)):
+      for i in range(0, len(ticket_list1)):
 
          dicti = {}
 
@@ -46,7 +46,7 @@ def view_tickets(request):
          #print("\n")
          #print("\n")
          #print("\n")
-         return render(request, "tickets/tickets.html", {'tickets':ticket_list ,'short_list':tickets_list_short})
+      return render(request, "tickets/tickets.html", {'tickets':ticket_list ,'short_list':tickets_list_short})
 
 
    return render(request, "tickets/tickets.html")
