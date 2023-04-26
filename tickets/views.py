@@ -3,6 +3,7 @@ from django.apps import apps
 import json 
 import ast
 from django.shortcuts import get_object_or_404
+from django.contrib import messages
 
 
 # Create your views here.
@@ -55,5 +56,7 @@ def ticket_delete(request, pk):
    print(ticket)
    if request.method == 'POST':
       ticket.delete()
+      messages.success(request, 'you have been refunded')
       return redirect('view_tickets')
+   messages.error(request, 'There was an issue with your refund request contact us to resolve this')
    return redirect('view_tickets')
