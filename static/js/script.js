@@ -27,7 +27,7 @@ function handleFromLocation() {
           location.iataCode +
           '\')">\
           <div class="card-header"><b>Name:</b>  ' +
-          location.name +
+          location.name + '    ' + '  <b>   IATA:</b>' + location.iataCode +
           ' </div>\
           <div class="card-body">\
             City Name:  ' +
@@ -74,7 +74,7 @@ function handleToLocation() {
           location.iataCode +
           '\')">\
             <div class="card-header"><b>Name:</b>  ' +
-          location.name +
+          location.name +'    ' + '  <b>   IATA:</b>' + location.iataCode +
           ' </div>\
             <div class="card-body">\
               City Name:  ' +
@@ -131,7 +131,7 @@ function handleFindFlight() {
   
 
   fetch(
-    `http://localhost:8000/api/v1/flight/search_offers/?originCode=${originCode}&destinationCode=${destinationCode}&departureDate=${departureDate}`
+    `/api/v1/flight/search_offers/?originCode=${originCode}&destinationCode=${destinationCode}&departureDate=${departureDate}`
   )
     .then((response) => response.json())
     .then((data) => {
