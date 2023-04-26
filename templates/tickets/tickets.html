@@ -11,6 +11,7 @@ body {
 		}
 		.container {
 			margin: 20px auto;
+      min-width: 800px;
 			max-width: 1400px;
 			border: 1px solid #ccc;
 			padding: 40px;
@@ -135,15 +136,32 @@ body {
                 </div>
               </div>
             </div>
+
+            <a href="#bblbalba" class="showmemore"><i class="bi bi-plus-square-fill"></i></a>
+            <div class="more">
+              <form action="{% url 'ticket_delete' t.ticket.id %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Request Refund"/>
+            </form>
+            </div>
+
           </div>
 
       </td>
         <td>
-          <button type="button" class="btn btn-danger">Delete</button>
-
         </td>
       </tr>
     {% endfor %}
+
+    <script>
+
+      $('div.more').hide()
+      $('a.showmemore').click(function(){
+      $(this).next('div').slideToggle()
+      })
+
+    </script>
+
  </table>
 
 
