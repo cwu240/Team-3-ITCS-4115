@@ -83,8 +83,8 @@ body {
             <div class="ticket-info">
               <div class="row">
                 <div class="col-6">
-                  <span class="label">Flight:</span>
-                  <span class="value">ABC123</span>
+                  <span class="label">Order ID:</span>
+                  <span class="value"> {{ t.id }} </span>
                 </div>
                 <div class="col-6">
                   <span class="label"></span>
@@ -124,7 +124,7 @@ body {
               <div class="row">
                 <div class="col-3">
                   <span class="label">Class:</span>
-                  <span class="value">Economy</span>
+                  <span class="value">{{ t.class }}</span>
                 </div>
                 <div class="col-3">
                   <span class="label">Seat:</span>
@@ -132,7 +132,7 @@ body {
                 </div>
                 <div class="col-6">
                   <span class="label">Price:</span>
-                  <span class="value">$500.00</span>
+                  <span class="value">{{ t.price }}</span>
                 </div>
               </div>
             </div>

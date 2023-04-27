@@ -26,7 +26,7 @@ def view_tickets(request):
 
          dicti = {}
 
-         #print(type(ticket_list[i]))
+         #print(ticket_list[i])
          #print("\n")
          #print(ticket_list[i]['flightOffers'][0]['itineraries'][0]['segments'] )
          #print(ticket_list[i]['flightOffers'][0]['itineraries'][0]['segments'][0]['departure']['iataCode'] )
@@ -40,6 +40,10 @@ def view_tickets(request):
          arr_time = ticket_list[i]['flightOffers'][0]['itineraries'][0]['segments'][-1]['arrival']['at'].replace('T',' ').split(' ')
          dicti['arr_date'] = arr_time[0]
          dicti['arr_time'] = arr_time[1]
+         dicti['price'] = ticket_list[i]['flightOffers'][0]['price']['total']
+         #print(ticket_list[i]['flightOffers'][0]['itineraries'][0]['segments'][0]['co2Emissions'])
+         dicti['class'] = ticket_list[i]['flightOffers'][0]['itineraries'][0]['segments'][0]['co2Emissions'][0]['cabin']
+         dicti['id'] = ticket_list[i]['id']
          tickets_list_short.append(dicti)
 
 

@@ -191,9 +191,6 @@ function handleFindFlight() {
 
 function BookFlight(flight) {
 
-
-
-  console.log(flight)
   const first = document.getElementById("first").value;
   const last = document.getElementById("last").value;
 
@@ -224,6 +221,8 @@ function BookFlight(flight) {
         .then((data) => {
           console.log("Success:", data);
           flights = [];
+          console.log("ayo")
+          window.location.href="/tickets/"
         })
         .catch((error) => {
           alert(error);
