@@ -5,12 +5,95 @@
 {% block style %}
 <style>
 
+body {
+    background-image: url("/static/images/white-cloud-blue-sky.jpg") ;
+    background-size: cover;
+}
+#wrapper {
+   width: 80%;
+   margin: 0 auto;
+   background-color: #ffffff;
+}
+.section-title {
+    margin-bottom: 50px;
+}
+
+.contact {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 50px;
+    margin-bottom: 50px;
+}
+
+.contact form .form-group input,
+.contact form .form-group textarea {
+    border: none;
+    border-bottom: 2px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.contact form .form-group textarea {
+    height: 150px;
+}
+
+.contact form .form-group input:focus,
+.contact form .form-group textarea:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.contact form .btn {
+    border-radius: 25px;
+    padding: 10px 25px;
+    font-size: 18px;
+    margin-top: 20px;
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.contact form .btn:hover {
+    background-color: #fff;
+    color: #007bff;
+}
+
+.single_address {
+    margin-bottom: 30px;
+}
+
+.single_address i {
+    color: #007bff;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.single_address h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.single_address p {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .contact form .form-group {
+        margin-bottom: 30px;
+    }
+}
+
 </style>
 
 {% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
+<div id = "wrapper">
 
 {% if messages %}
 <div class="messages">
@@ -24,11 +107,10 @@
 
 
 
-
 <div id="contact" class="container">
 	<div class="container">										
 		<div class="section-title text-center">
-			<h1>Get in Touch</h1>
+			<h1>Get in Touch with Us</h1>
 			<p>Send us a message below with any questions or concerns</p>
 		</div>					
 		<div class="row">
@@ -60,29 +142,72 @@
 				<div class="single_address">
 					<i class="fa fa-map-marker"></i>
 					<h4>Our Address</h4>
-					<p>3481 Melrose Place, Beverly Hills</p>
+					<p>9201 University City Blvd, Charlotte, NC 28223</p>
 				</div>
 				<div class="single_address">
 					<i class="fa fa-envelope"></i>
 					<h4>Send your message</h4>
-					<p>Info@example.com</p>
+					<p>airlinebooking@gmail.com</p>
 				</div>
 				<div class="single_address">
 					<i class="fa fa-phone"></i>
 					<h4>Call us on</h4>
-					<p>(+1) 517 397 7100</p>
+					<p>(+1) 704-777-7777</p>
 				</div>
 				<div class="single_address">
 					<i class="fa fa-clock-o"></i>
 					<h4>Work Time</h4>
-					<p>Mon - Fri: 08.00 - 16.00. <br>Sat: 10.00 - 14.00</p>
+					<p>Mon - Fri: 08:00 - 16:00. <br>Sat: 10:00 - 14:00 <br>Sun: 10:00 - 13:00 </p>
 				</div>					
 			</div><!--- END COL --> 
 		</div><!--- END ROW -->
 	</div><!--- END CONTAINER -->	
 </div>
+</div>
 {% else %}
-  <p>must log in to contact us</p>
-  <a href="{% url 'login' %}">Log In</a>
+<div id = "wrapper">
+<div id="contact" class="container">
+	<div class="container">										
+		<div class="section-title text-center">
+			<div class="contact">
+			<h1>Get in Touch with Us</h1>
+			<p>Send us a message below with any questions or concerns</p>
+			</div>
+		</div>					
+		<div class="row">
+			<div class="col-lg-7">	
+				<div class="contact">
+				<p>Log in to send us a message</p>
+				<a href="{% url 'login' %}" class="btn btn-default btn-outline-primary">Log In</a>
+				</div>
+			</div><!--- END COL --> 
+			<div class="col-lg-5">
+				<div class="single_address">
+					<i class="fa fa-map-marker"></i>
+					<h4>Our Address</h4>
+					<p>9201 University City Blvd, Charlotte, NC 28223</p>
+				</div>
+				<div class="single_address">
+					<i class="fa fa-envelope"></i>
+					<h4>Send your message</h4>
+					<p>airlinebooking@gmail.com</p>
+				</div>
+				<div class="single_address">
+					<i class="fa fa-phone"></i>
+					<h4>Call us on</h4>
+					<p>(+1) 704-777-7777</p>
+				</div>
+				<div class="single_address">
+					<i class="fa fa-clock-o"></i>
+					<h4>Work Time</h4>
+					<p>Mon - Fri: 08:00 - 16:00. <br>Sat: 10:00 - 14:00 <br>Sun: 10:00 - 13:00 </p>
+				</div>					
+			</div><!--- END COL --> 
+		</div><!--- END ROW -->
+	</div><!--- END CONTAINER -->	
+</div>
+</div>
+
+
 {% endif %}
 {% endblock %}

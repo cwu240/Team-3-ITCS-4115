@@ -51,11 +51,26 @@ body {
 			margin-bottom: 10px;
 		}
 
+    body {
+    background-image: url("/static/images/white-cloud-blue-sky.jpg") ;
+    background-size: cover;
+    }
+    #wrapper {
+      width: 80%;
+      margin: 0 auto;
+      background-color: #ffffff;
+    }
+    .centered {
+      display: flex;
+      justify-content: center;
+    }
 </style>
 
 {% endblock %}
 
 {% block content %}
+
+<div id="wrapper">
 
 
 {% if messages %}
@@ -71,12 +86,14 @@ body {
 
 
 {% if user.is_authenticated %}
-  <table style="margin-left: 20%;">
+  <table style="margin-left: 10%;">
     <tr>
     </tr>
     {% for t in short_list%}
     <tr>
         <td>
+                  
+        <div class = "centered">
 
           <div class="container">
             <h1>Flight Ticket</h1>
@@ -201,6 +218,7 @@ body {
             </div>
 
           </div>
+        </div>
 
       </td>
         <td>
@@ -221,7 +239,163 @@ body {
 
 
 {% else %}
-  <p>must log in to view tickets</p>
-  <a href="{% url 'login' %}">Log In</a>
+
+<div id="contact" class="container">
+	<div class="container">										
+		<div class="section-title text-center">
+			<div class="contact">
+			<h3>Here is where you will be able to view your tickets</h3>
+			<p>You can log in to view tickets you've booked</p>
+      <a href="{% url 'login' %}" class="btn btn-default btn-outline-primary">Log In</a>
+		</div>
+	</div>		
+</div>
+
+
+
+<table style="margin-left: 10%;">
+  <tr>
+  </tr>
+  <tr>
+      <td>
+        
+        <div class = "centered">
+
+        <div class="container">
+          <h1>Example Flight Ticket</h1>
+          <div class="ticket-info">
+            <div class="row">
+              <div class="col-6">
+                <span class="label">Order ID:</span>
+                <span class="value"> EXAMPLEID12345 </span>
+              </div>
+              <div class="col-6">
+                <span class="label"></span>
+                <span class="value"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <span class="label">From:</span>
+                <span class="value">CLT</span>
+              </div>
+              <div class="col-6">
+                <span class="label">To:</span>
+                <span class="value">JFK</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <span class="label">Departure Time:</span>
+                <span class="value">10:00</span>
+              </div>
+              <div class="col-6">
+                <span class="label">Arrival Time:</span>
+                <span class="value">12:00</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <span class="label">Departure Date:</span>
+                <span class="value">1/27/22</span>
+              </div>
+              <div class="col-6">
+                <span class="label">Arrival Date:</span>
+                <span class="value">1/27/22</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">
+                <span class="label">Class:</span>
+                <span class="value">economy</span>
+              </div>
+              <div class="col-3">
+                <span class="label">Seat:</span>
+                <span class="value">15B</span>
+              </div>
+              <div class="col-6">
+                <span class="label">Price:</span>
+                <span class="value">$80</span>
+              </div>
+            </div>
+          </div>
+
+
+          
+          <a href="#bblbalba" class="showmemore"><i class="bi bi-plus-square-fill"></i></a>
+          <div class="more">
+
+            <div class="ticket-info">
+              <div class="row">
+                <div class="col-6">
+                  <span class="label">Example Itinerary:</span>
+                </div>
+                <div class="col-6">
+                  <span class="label"></span>
+                  <span class="value"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <span class="label">From:</span>
+                  <span class="value">CLT</span>
+                </div>
+                <div class="col-6">
+                  <span class="label">To:</span>
+                  <span class="value">JFK</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <span class="label">Departure Time:</span>
+                  <span class="value">10:00</span>
+                </div>
+                <div class="col-6">
+                  <span class="label">Arrival Time:</span>
+                  <span class="value">12:00</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <span class="label">Departure Date:</span>
+                  <span class="value">1/27/22</span>
+                </div>
+                <div class="col-6">
+                  <span class="label">Arrival Date:</span>
+                  <span class="value">1/27/22</span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="border-top my-3"></div>
+
+
+            
+          </div>
+
+        </div>
+
+      </div>
+
+    </td>
+      <td>
+      </td>
+    </tr>
+
+  <script>
+
+    $('div.more').hide()
+    $('a.showmemore').click(function(){
+    $(this).next('div').slideToggle()
+    })
+
+  </script>
+
+</table>
+
+
+
 {% endif %}
+</div>
 {% endblock %}

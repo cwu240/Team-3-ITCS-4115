@@ -63,58 +63,62 @@ def price_search(req):
 
 @csrf_exempt
 def book_a_flight(req):
-    if req.method == "POST":
-        current_user = req.user
-        try:
-            data = json.loads(req.body)
-            print(data)
-            flight = data.get("flight")
-            print("flight" , flight)
-            passenger = data.get('traveler')
-            print(passenger)
-            
-            traveler = {
-                'id': '1',
-                'dateOfBirth': str(current_user.dob),
-                'name': {
-                    'firstName': current_user.first_name,
-                    'lastName': current_user.last_name
-                },
-                'gender': 'MALE',
-                'contact': {
-                    'emailAddress': current_user.email,
-                    'phones': [{
-                        'deviceType': 'MOBILE',
-                        'countryCallingCode': '1',
-                        'number': current_user.phone_number
-                    }]
-                },
-                'documents': [{
-                    'documentType': 'PASSPORT',
-                    'birthPlace': 'Madrid',
-                    'issuanceLocation': 'Madrid',
-                    'issuanceDate': '2015-04-14',
-                    'number': '00000000',
-                    'expiryDate': '2025-04-14',
-                    'issuanceCountry': 'ES',
-                    'validityCountry': 'ES',
-                    'nationality': 'ES',
-                    'holder': True
-                }]
-            }
 
-
+    if(req.user.is_authenticated):
+        if req.method == "POST":
+            current_user = req.user
             try:
-                booking = amadeus.booking.flight_orders.post(flight, traveler).data
-                ticket_obj = Tickets.objects.create(customer_id = current_user, json_ticket_data = booking)
-                ticket_obj.save()
-                messages.success(req, 'your flight has been booked')
-            except Exception as error:
-                messages.error(req, 'there was an error processing the request, please try again')
-                return JsonResponse({"error": "some error when processing request"})
+                data = json.loads(req.body)
+                print(data)
+                flight = data.get("flight")
+                print("flight" , flight)
+                passenger = data.get('traveler')
+                print(passenger)
+                
+                traveler = {
+                    'id': '1',
+                    'dateOfBirth': str(current_user.dob),
+                    'name': {
+                        'firstName': current_user.first_name,
+                        'lastName': current_user.last_name
+                    },
+                    'gender': 'MALE',
+                    'contact': {
+                        'emailAddress': current_user.email,
+                        'phones': [{
+                            'deviceType': 'MOBILE',
+                            'countryCallingCode': '1',
+                            'number': current_user.phone_number
+                        }]
+                    },
+                    'documents': [{
+                        'documentType': 'PASSPORT',
+                        'birthPlace': 'Madrid',
+                        'issuanceLocation': 'Madrid',
+                        'issuanceDate': '2015-04-14',
+                        'number': '00000000',
+                        'expiryDate': '2025-04-14',
+                        'issuanceCountry': 'ES',
+                        'validityCountry': 'ES',
+                        'nationality': 'ES',
+                        'holder': True
+                    }]
+                }
 
-            return JsonResponse(booking)
-        except ResponseError as error:
-            print(error)
+
+                try:
+                    booking = amadeus.booking.flight_orders.post(flight, traveler).data
+                    ticket_obj = Tickets.objects.create(customer_id = current_user, json_ticket_data = booking)
+                    ticket_obj.save()
+                    messages.success(req, 'your flight has been booked')
+                except Exception as error:
+                    messages.error(req, 'there was an error processing the request, please try again')
+                    return JsonResponse({"error": "some error when processing request"})
+
+                return JsonResponse(booking)
+            except ResponseError as error:
+                print(error)
+        else:
+            return JsonResponse({"error": "Invalid request method"})
     else:
-        return JsonResponse({"error": "Invalid request method"})
+        return JsonResponse({"error": "please log in to do that"})

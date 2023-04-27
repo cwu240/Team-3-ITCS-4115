@@ -9,10 +9,21 @@
 
 <style>
 
-.locations:hover {
-cursor: pointer;
-border: 2px solid #3E7DC0;
-}
+    .locations:hover {
+      cursor: pointer;
+      border: 2px solid #3E7DC0;
+      }
+
+    body {
+    background-image: url("/static/images/white-cloud-blue-sky.jpg") ;
+    background-size: cover;
+    }
+
+    #wrapper {
+      width: 80%;
+      margin: 0 auto;
+      background-color: #ffffff;
+    }
 </style>
 
 
@@ -20,6 +31,7 @@ border: 2px solid #3E7DC0;
 
 
 {% block content %}
+<div id="wrapper">
 
 {% if messages %}
 <div class="messages">
@@ -91,4 +103,5 @@ border: 2px solid #3E7DC0;
   ></script>
   <script src="{% static 'js/script.js' %}"></script>
 </html>
+</div>
 {% endblock %}
