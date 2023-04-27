@@ -23,8 +23,9 @@ def select_destination(req, param):
             }
             return JsonResponse(context)
         except ResponseError as error:
-            print("ayo")
-            print(error)
+            #occasional erros happend when searching
+            #print(error)
+            return JsonResponse({"error": "some error when processing request"})
 
     else:
         return JsonResponse({"error": "Invalid request method"})
@@ -35,9 +36,6 @@ def search_offers(req):
             origin_code = req.GET.get('originCode')
             destination_code = req.GET.get('destinationCode')
             departure_date = req.GET.get('departureDate')
-            print('origin code: ', origin_code)
-            print('destination code: ', destination_code)
-            print('departur data: ',departure_date)
             response = amadeus.shopping.flight_offers_search.get(originLocationCode = origin_code,destinationLocationCode = destination_code, departureDate = departure_date, adults=1)
             context = {
                 "data" : response.data
@@ -111,8 +109,7 @@ def book_a_flight(req):
                 ticket_obj.save()
                 messages.success(req, 'your flight has been booked')
             except Exception as error:
-                print("erorr when booking")
-                print(error)
+                return JsonResponse({"error": "some error when processing request"})
 
             return JsonResponse(booking)
         except ResponseError as error:

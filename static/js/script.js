@@ -12,9 +12,11 @@ const listOfFlightOffers = document.getElementById("listOfFlightOffers")
 
 
 function handleFromLocation() {
+  try{
   let locationEl = "";
   const fromInput = document.getElementById("from").value;
   if (fromInput.length > 1) {
+    
     fetch(`/api/v1/flight/select_destination/${fromInput}`)
       .then((response) => response.json())
       .then((data) => (fromLocationArray = data.data));
@@ -49,6 +51,9 @@ function handleFromLocation() {
   }
 
   fromLocationData.innerHTML = locationEl;
+  }catch(error){
+
+  }
 }
 
 function getFromLocation(regionCode) {
@@ -59,6 +64,7 @@ function getFromLocation(regionCode) {
 }
 
 function handleToLocation() {
+  try{
   let locationEl = "";
   const toInput = document.getElementById("to").value;
   if (toInput.length > 1) {
@@ -96,6 +102,9 @@ function handleToLocation() {
   }
 
   toLocationData.innerHTML = locationEl;
+ }catch(error){
+
+ }
 }
 
 function getToLocation(regionCode) {
