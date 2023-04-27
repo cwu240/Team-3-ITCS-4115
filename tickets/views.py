@@ -44,6 +44,26 @@ def view_tickets(request):
          #print(ticket_list[i]['flightOffers'][0]['itineraries'][0]['segments'][0]['co2Emissions'])
          dicti['class'] = ticket_list[i]['flightOffers'][0]['itineraries'][0]['segments'][0]['co2Emissions'][0]['cabin']
          dicti['id'] = ticket_list[i]['id']
+
+
+         itinerary = []
+         for j in range(0, len(ticket_list[i]['flightOffers'][0]['itineraries'][0]['segments'])):
+            dicti1 ={}
+            dicti1['dept_iata'] = ticket_list[i]['flightOffers'][0]['itineraries'][0]['segments'][j]['departure']['iataCode']
+            dept_time = ticket_list[i]['flightOffers'][0]['itineraries'][0]['segments'][j]['departure']['at'].replace('T',' ').split(' ')
+            dicti1['dept_date'] = dept_time[0]
+            dicti1['dept_time'] = dept_time[1]
+            dicti1['arr_iata'] = ticket_list[i]['flightOffers'][0]['itineraries'][0]['segments'][j]['arrival']['iataCode']
+            arr_time = ticket_list[i]['flightOffers'][0]['itineraries'][0]['segments'][j]['arrival']['at'].replace('T',' ').split(' ')
+            dicti1['arr_date'] = arr_time[0]
+            dicti1['arr_time'] = arr_time[1]
+
+            itinerary.append(dicti1)
+
+
+
+
+         dicti['itinerary'] = itinerary
          tickets_list_short.append(dicti)
 
 

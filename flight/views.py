@@ -56,7 +56,8 @@ def price_search(req):
             response = amadeus.shopping.flight_offers.pricing.post(flight)
             return JsonResponse(response.data)
         except ResponseError as error:
-            print(error)
+            messages.error(req, 'there was an error processing the request, please try again')
+            return JsonResponse({"error": "some error when processing request"})
     else:
           return JsonResponse({"error": "Invalid request method"})
 
@@ -109,6 +110,7 @@ def book_a_flight(req):
                 ticket_obj.save()
                 messages.success(req, 'your flight has been booked')
             except Exception as error:
+                messages.error(req, 'there was an error processing the request, please try again')
                 return JsonResponse({"error": "some error when processing request"})
 
             return JsonResponse(booking)

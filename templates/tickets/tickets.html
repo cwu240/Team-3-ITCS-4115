@@ -137,12 +137,67 @@ body {
               </div>
             </div>
 
+
+            
             <a href="#bblbalba" class="showmemore"><i class="bi bi-plus-square-fill"></i></a>
             <div class="more">
+
+              <div class="ticket-info">
+                <div class="row">
+                  <div class="col-6">
+                    <span class="label">Itinerary:</span>
+                  </div>
+                  <div class="col-6">
+                    <span class="label"></span>
+                    <span class="value"></span>
+                  </div>
+                </div>
+
+                {% for m in t.itinerary%}
+
+                <div class="row">
+                  <div class="col-6">
+                    <span class="label">From:</span>
+                    <span class="value">{{ m.dept_iata }}</span>
+                  </div>
+                  <div class="col-6">
+                    <span class="label">To:</span>
+                    <span class="value">{{ m.arr_iata }}</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <span class="label">Departure Time:</span>
+                    <span class="value">{{ m.dept_time }}</span>
+                  </div>
+                  <div class="col-6">
+                    <span class="label">Arrival Time:</span>
+                    <span class="value">{{ m.arr_time }}</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <span class="label">Departure Date:</span>
+                    <span class="value">{{ m.dept_date }}</span>
+                  </div>
+                  <div class="col-6">
+                    <span class="label">Arrival Date:</span>
+                    <span class="value">{{ m.arr_date }}</span>
+                  </div>
+                </div>
+        
+                {% endfor %}
+              </div>
+
+
+              <div class="border-top my-3"></div>
+
+
               <form action="{% url 'ticket_delete' t.ticket.id %}" method="POST">
                 {% csrf_token %}
                 <input type="submit" value="Request Refund"/>
-            </form>
+              </form>
+              
             </div>
 
           </div>
