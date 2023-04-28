@@ -9,3 +9,7 @@ in terminal for requirements
 In terminal run:<br>
 <code>python manage.py runserver </code> <br>
 Then copy the link into the browser and run.
+<h2>Set up an account</h2>
+After setting up an account, log in, and click on the profile tab on the navbar.
+Enter in information into the fields.
+After entering information in profile you can search and book tickets.
